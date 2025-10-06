@@ -60,5 +60,5 @@ public class Materia {
         return "[ID de la Materia: " + idMateria + " / Nombre de la Materia: " + nombre + " / Anio: " + anio + " / Estado: " + estado + ']';
     }
     
-    
+      
 }
