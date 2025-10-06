@@ -1,20 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
-package Vista;
+package vista;
+import Modelo.Alumno;
+import Persistencia.AlumnoData;
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+import java.sql.Date;  
 
-/**
- *
- * @author thefl
- */
+
+
 public class frmAlumno extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmAlumno
-     */
+   private AlumnoData alumnoData;
+   
+   
     public frmAlumno() {
         initComponents();
+        alumnoData = new AlumnoData();
     }
 
     /**
@@ -31,11 +32,11 @@ public class frmAlumno extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
+        Guardar = new javax.swing.JButton();
+        Borrar = new javax.swing.JButton();
+        Actualizar = new javax.swing.JButton();
+        Limpiar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("ALUMNOS");
@@ -44,20 +45,40 @@ public class frmAlumno extends javax.swing.JInternalFrame {
 
         jLabel3.setText("NOMBRE:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BuscarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Guardar");
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Borrar");
+        Borrar.setText("Borrar");
+        Borrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Actualizar");
+        Actualizar.setText("Actualizar");
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Limpiar");
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,7 +99,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))))
+                                .addComponent(Buscar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -86,13 +107,13 @@ public class frmAlumno extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton2)
+                                .addComponent(Guardar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
+                                .addComponent(Borrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4)
+                                .addComponent(Actualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5)))
+                                .addComponent(Limpiar)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(29, 29, 29))
         );
@@ -105,34 +126,142 @@ public class frmAlumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(Buscar))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(Guardar)
+                    .addComponent(Borrar)
+                    .addComponent(Actualizar)
+                    .addComponent(Limpiar))
                 .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+       //Boton Buscar
+     try {
+        String txtId = jTextField1.getText().trim();
+        if (txtId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID del alumno a buscar");
+            return;
+        }
+        int id = Integer.parseInt(txtId);
+        Alumno alumno = alumnoData.buscarAlumno(id);
+        if (alumno != null) {
+            jTextField2.setText(alumno.getNombre());
+            // si querés mostrar más campos (apellido, dni, estado) necesitás más textfields y asignarlos aquí:
+            // jTextFieldApellido.setText(alumno.getApellido());
+            // ...
+        } else {
+            JOptionPane.showMessageDialog(this, "Alumno no encontrado");
+        }
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "ID inválido. Ingrese un número entero");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al buscar: " + ex.getMessage());
+    }                                     
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // Boton Guardar
+    try {
+        String nombre = jTextField2.getText().trim();
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre del alumno");
+            return;
+        }
+
+        Alumno alumno = new Alumno();
+        alumno.setNombre(nombre);
+
+        alumno.setEstado(true);                       
+        alumno.setFechaNacimiento(LocalDate.now());  
+
+        alumnoData.guardarAlumno(alumno);
+        JOptionPane.showMessageDialog(this, "Alumno guardado correctamente");
+        limpiarCampos();
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al guardar: " + ex.getMessage());
+    }               
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void BorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarActionPerformed
+        // Boton Borrar
+   try {
+        String txtId = jTextField1.getText().trim();
+        if (txtId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID del alumno a borrar");
+            return;
+        }
+        int id = Integer.parseInt(txtId);
+        alumnoData.eliminarAlumno(id);
+        JOptionPane.showMessageDialog(this, "Alumno eliminado correctamente");
+        limpiarCampos();
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "ID inválido. Ingrese un número entero");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al borrar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_BorrarActionPerformed
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        // Boton Actualizar
+         try {
+        String txtId = jTextField1.getText().trim();
+        if (txtId.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el ID del alumno a actualizar");
+            return;
+        }
+        int id = Integer.parseInt(txtId);
+
+        String nombre = jTextField2.getText().trim();
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre del alumno");
+            return;
+        }
+
+        Alumno alumno = alumnoData.buscarAlumno(id);
+        if (alumno != null) {
+            alumno.setNombre(nombre);
+            // si querés actualizar estado/fecha también, usá setEstado(...) y setFechaNacimiento(...)
+            alumnoData.modificarAlumno(alumno);
+            JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente");
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Alumno no encontrado");
+        }
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "ID inválido. Ingrese un número entero");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_ActualizarActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+        // Boton Limpiar
+          limpiarCampos();
+}
+
+private void limpiarCampos() {
+    jTextField1.setText("");
+    jTextField2.setText("");
+    
+
+    }//GEN-LAST:event_LimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton Actualizar;
+    private javax.swing.JButton Borrar;
+    private javax.swing.JButton Buscar;
+    private javax.swing.JButton Guardar;
+    private javax.swing.JButton Limpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
