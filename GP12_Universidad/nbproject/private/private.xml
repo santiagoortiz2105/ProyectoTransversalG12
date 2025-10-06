@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Persistencia/AlumnoData.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Modelo/Alumno.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Modelo/Materia.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Persistencia/MateriaData.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Persistencia/Conexion.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMenuPrincipal.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMateria.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmAlumno.java</file>
-            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/GP12_Universidad.java</file>
+            <file>file:/C:/Users/santi/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/GP12_Universidad.java</file>
+            <file>file:/C:/Users/santi/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmAlumno.java</file>
+            <file>file:/C:/Users/santi/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMateria.java</file>
+            <file>file:/C:/Users/santi/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMenuPrincipal.java</file>
+            <file>file:/C:/Users/santi/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Persistencia/AlumnoData.java</file>
         </group>
     </open-files>
 </project-private>

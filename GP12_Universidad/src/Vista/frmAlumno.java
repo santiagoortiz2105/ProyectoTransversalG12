@@ -155,9 +155,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
         Alumno alumno = alumnoData.buscarAlumno(id);
         if (alumno != null) {
             jTextField2.setText(alumno.getNombre());
-            // si querés mostrar más campos (apellido, dni, estado) necesitás más textfields y asignarlos aquí:
-            // jTextFieldApellido.setText(alumno.getApellido());
-            // ...
+           
         } else {
             JOptionPane.showMessageDialog(this, "Alumno no encontrado");
         }
@@ -229,7 +227,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
         Alumno alumno = alumnoData.buscarAlumno(id);
         if (alumno != null) {
             alumno.setNombre(nombre);
-            // si querés actualizar estado/fecha también, usá setEstado(...) y setFechaNacimiento(...)
+          
             alumnoData.modificarAlumno(alumno);
             JOptionPane.showMessageDialog(this, "Alumno actualizado correctamente");
             limpiarCampos();
