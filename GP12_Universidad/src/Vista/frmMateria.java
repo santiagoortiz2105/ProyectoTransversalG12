@@ -3,18 +3,26 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Vista;
-
+import Persistencia.MateriaData;
+import Modelo.Materia;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author thefl
  */
 public class frmMateria extends javax.swing.JInternalFrame {
 
+     private MateriaData materiaData = new MateriaData();
+     private DefaultTableModel modeloTabla;
     /**
      * Creates new form frmMateria
      */
     public frmMateria() {
         initComponents();
+        modeloTabla = (DefaultTableModel) jTable1.getModel();
+        cargarTabla();
     }
 
     /**
@@ -74,6 +82,11 @@ public class frmMateria extends javax.swing.JInternalFrame {
         });
 
         jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Activo");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +98,11 @@ public class frmMateria extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado de la materia:");
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar");
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,10 +112,25 @@ public class frmMateria extends javax.swing.JInternalFrame {
         });
 
         jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
 
         jbLista.setText("Lista");
+        jbLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListaActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,7 +250,19 @@ public class frmMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+        try {
+        int id = Integer.parseInt(tfCod.getText());
+        Materia m = materiaData.buscarMateria(id);
+        if (m != null) {
+            tfNombre.setText(m.getNombre());
+            tfAño.setText(String.valueOf(m.getAnio()));
+            jCheckBox1.setSelected(m.isEstado());
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró la materia");
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al buscar: " + e.getMessage());
+    }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void tfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNombreActionPerformed
@@ -233,9 +278,79 @@ public class frmMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-        // TODO add your handling code here:
+        try {
+        int id = Integer.parseInt(tfCod.getText());
+        materiaData.eliminarMateria(id);
+        JOptionPane.showMessageDialog(this, "Materia eliminada");
+        cargarTabla();
+        limpiarCampos();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al borrar: " + e.getMessage());
+    }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+         this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+       try {
+        int id = Integer.parseInt(tfCod.getText());
+        String nombre = tfNombre.getText();
+        int anio = Integer.parseInt(tfAño.getText());
+        boolean estado = jCheckBox1.isSelected();
+
+        Materia materia = new Materia(id, nombre, anio, estado);
+        materiaData.modificarMateria(materia);
+        JOptionPane.showMessageDialog(this, "Materia actualizada");
+        cargarTabla();
+        limpiarCampos();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListaActionPerformed
+          cargarTabla();
+    }//GEN-LAST:event_jbListaActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try {
+        String nombre = tfNombre.getText();
+        int anio = Integer.parseInt(tfAño.getText());
+        boolean estado = jCheckBox1.isSelected();
+
+        Materia materia = new Materia(nombre, anio, estado);
+        materiaData.guardarMateria(materia);
+        JOptionPane.showMessageDialog(this, "Materia guardada con ID: " + materia.getIdMateria());
+        cargarTabla();
+        limpiarCampos();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+         limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+    
+    private void limpiarCampos() {
+        tfCod.setText("");
+        tfNombre.setText("");
+        tfAño.setText("");
+        jCheckBox1.setSelected(false);
+}
+     private void cargarTabla() {
+    modeloTabla.setRowCount(0);
+    List<Materia> lista = materiaData.listarMaterias();
+    for (Materia m : lista) {
+        modeloTabla.addRow(new Object[]{
+            m.getIdMateria(), m.getNombre(), m.getAnio(), 
+            m.isEstado()? "Activo" : "Inactivo", 
+            m.isEstado()
+        });
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
