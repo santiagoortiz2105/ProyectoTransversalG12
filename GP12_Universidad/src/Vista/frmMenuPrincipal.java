@@ -5,7 +5,7 @@
 package Vista;
 import vista.frmAlumno;
 import Vista.frmMateria;
-
+import Vista.frmInscripciones;
 
 /**
  *
@@ -38,6 +38,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jFormularioAlumnos = new javax.swing.JMenuItem();
         jMenuMateria = new javax.swing.JMenu();
         jFormularioMaterias = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jFormularioInscripcion = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenu();
         jSalir = new javax.swing.JMenuItem();
 
@@ -89,6 +91,18 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuMateria);
 
+        jMenu1.setText("Inscripciones");
+
+        jFormularioInscripcion.setText("Formulario Inscripcion ");
+        jFormularioInscripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormularioInscripcionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jFormularioInscripcion);
+
+        jMenuBar1.add(jMenu1);
+
         jMenuSalir.setText("Salir");
 
         jSalir.setText("Salir");
@@ -139,6 +153,15 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jEscritorio.moveToFront(alumno);
     }//GEN-LAST:event_jFormularioAlumnosActionPerformed
 
+    private void jFormularioInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormularioInscripcionActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        frmInscripciones inscripciones = new frmInscripciones();
+        inscripciones.setVisible(true);
+        jEscritorio.add(inscripciones);
+        jEscritorio.moveToFront(inscripciones);
+    }//GEN-LAST:event_jFormularioInscripcionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,7 +191,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jEscritorio;
     private javax.swing.JMenuItem jFormularioAlumnos;
+    private javax.swing.JMenuItem jFormularioInscripcion;
     private javax.swing.JMenuItem jFormularioMaterias;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAlumno;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuMateria;
