@@ -38,6 +38,11 @@ public class frmAlumno extends javax.swing.JInternalFrame {
         Actualizar = new javax.swing.JButton();
         Limpiar = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("ALUMNOS");
 

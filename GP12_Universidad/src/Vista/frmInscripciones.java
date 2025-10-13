@@ -3,18 +3,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package Vista;
-
+import javax.swing.table.DefaultTableModel;
+import Modelo.Alumno;
+import Modelo.Materia;
+import Modelo.Inscripcion;
+import Persistencia.AlumnoData;
+import Persistencia.MateriaData;
+import Persistencia.InscripcionData;
+import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Lulim
  */
 public class frmInscripciones extends javax.swing.JInternalFrame {
-
+   
+    private InscripcionData inscripcionData = new InscripcionData();
+    private AlumnoData alumnoData = new AlumnoData();
+    private MateriaData materiaData = new MateriaData();
+    private DefaultTableModel modelo = new DefaultTableModel();
     /**
      * Creates new form frmInscripciones
      */
     public frmInscripciones() {
         initComponents();
+        cargarAlumnosEnCombo();
+        armarCabeceraTabla();
     }
 
     /**
@@ -32,15 +46,15 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jBotonInscriptas = new javax.swing.JRadioButton();
+        jBotonNoInscriptas = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBotonGuardar = new javax.swing.JButton();
+        jBotonBorrar = new javax.swing.JButton();
+        jBotonActualizar = new javax.swing.JButton();
+        jBotonLimpiar = new javax.swing.JButton();
+        jBotonBuscar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -55,6 +69,11 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("FORMULARIO INSCRIPCIÓN");
@@ -64,18 +83,32 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
 
         jComboBox1.setBackground(new java.awt.Color(204, 204, 204));
         jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("LISTADO DE MATERIAS ");
 
-        jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setText("Inscriptas");
+        jBotonInscriptas.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jBotonInscriptas.setForeground(new java.awt.Color(0, 0, 0));
+        jBotonInscriptas.setText("Inscriptas");
+        jBotonInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonInscriptasActionPerformed(evt);
+            }
+        });
 
-        jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("No inscriptas");
+        jBotonNoInscriptas.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        jBotonNoInscriptas.setForeground(new java.awt.Color(0, 0, 0));
+        jBotonNoInscriptas.setText("No inscriptas");
+        jBotonNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jTable2.setBackground(new java.awt.Color(204, 204, 204));
         jTable2.setForeground(new java.awt.Color(0, 0, 0));
@@ -92,15 +125,40 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jButton1.setText("Guardar");
+        jBotonGuardar.setText("Guardar");
+        jBotonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonGuardarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Borrar");
+        jBotonBorrar.setText("Borrar");
+        jBotonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonBorrarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Actualizar");
+        jBotonActualizar.setText("Actualizar");
+        jBotonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonActualizarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Limpiar");
+        jBotonLimpiar.setText("Limpiar");
+        jBotonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonLimpiarActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Buscar");
+        jBotonBuscar.setText("Buscar");
+        jBotonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,9 +170,9 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
                         .addGap(117, 117, 117)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton2)
+                                .addComponent(jBotonInscriptas)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton1))
+                                .addComponent(jBotonNoInscriptas))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -124,20 +182,20 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jBotonGuardar)
                                 .addGap(49, 49, 49)
-                                .addComponent(jButton2)
+                                .addComponent(jBotonBorrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)
+                                .addComponent(jBotonActualizar)
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton4))
+                                .addComponent(jBotonLimpiar))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(jBotonBuscar)
                 .addGap(46, 46, 46))
         );
         layout.setVerticalGroup(
@@ -152,38 +210,131 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jButton5))
+                    .addComponent(jBotonBuscar))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jBotonInscriptas)
+                    .addComponent(jBotonNoInscriptas))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jBotonGuardar)
+                    .addComponent(jBotonBorrar)
+                    .addComponent(jBotonActualizar)
+                    .addComponent(jBotonLimpiar))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+      
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jBotonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBuscarActionPerformed
+         if (jBotonInscriptas.isSelected()) {
+        jBotonInscriptasActionPerformed(evt);
+    } else if (jBotonNoInscriptas.isSelected()) {
+        jBotonNoInscriptasActionPerformed(evt);
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una opción (Inscriptas o No inscriptas).");
+    }
+    }//GEN-LAST:event_jBotonBuscarActionPerformed
+
+    private void jBotonInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonInscriptasActionPerformed
+         limpiarTabla();
+    Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
+    if (alumno != null) {
+        List<Materia> materias = inscripcionData.obtenerMateriasInscriptas(alumno.getIdAlumno());
+        for (Materia m : materias) {
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+        }
+    }
+    }//GEN-LAST:event_jBotonInscriptasActionPerformed
+
+    private void jBotonNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonNoInscriptasActionPerformed
+         limpiarTabla();
+         Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
+        if (alumno != null) {
+        List<Materia> materias = inscripcionData.obtenerMateriasNoInscriptas(alumno.getIdAlumno());
+        for (Materia m : materias) {
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+        }
+    }
+    }//GEN-LAST:event_jBotonNoInscriptasActionPerformed
+
+    private void jBotonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonGuardarActionPerformed
+        int fila = jTable2.getSelectedRow();
+    if (fila != -1) {
+        Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
+        int idMateria = (int) modelo.getValueAt(fila, 0);
+        Materia materia = materiaData.buscarMateria(idMateria);
+
+        Inscripcion insc = new Inscripcion(alumno, materia, 0);
+        inscripcionData.guardarInscripcion(insc);
+        limpiarTabla();
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una materia.");
+    }
+    }//GEN-LAST:event_jBotonGuardarActionPerformed
+
+    private void jBotonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBorrarActionPerformed
+         int fila = jTable2.getSelectedRow();
+    if (fila != -1) {
+        Alumno alumno = (Alumno) jComboBox1.getSelectedItem();
+        int idMateria = (int) modelo.getValueAt(fila, 0);
+        inscripcionData.eliminarInscripcionPorAlumnoYMateria(alumno.getIdAlumno(), idMateria);
+        limpiarTabla();
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione una materia que desee borrar.");
+    }
+    }//GEN-LAST:event_jBotonBorrarActionPerformed
+
+    private void jBotonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonActualizarActionPerformed
+         if (jBotonInscriptas.isSelected()) {
+        jBotonInscriptasActionPerformed(evt);
+         } else if (jBotonNoInscriptas.isSelected()) {
+        jBotonNoInscriptasActionPerformed(evt);
+    }
+    }//GEN-LAST:event_jBotonActualizarActionPerformed
+
+    private void jBotonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonLimpiarActionPerformed
+        limpiarTabla();
+        jBotonInscriptas.setSelected(false);
+        jBotonNoInscriptas.setSelected(false);
+    }//GEN-LAST:event_jBotonLimpiarActionPerformed
+
+    private void cargarAlumnosEnCombo() {
+       jComboBox1.removeAllItems();
+       for (Alumno alu : alumnoData.obtenerAlumnos()) {
+       jComboBox1.addItem(alu);
+    }
+}
+
+    private void armarCabeceraTabla() {
+      modelo.addColumn("ID");
+      modelo.addColumn("Nombre");
+      modelo.addColumn("Año");
+      jTable2.setModel(modelo);
+}
+    private void limpiarTabla() {
+    modelo.setRowCount(0);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jBotonActualizar;
+    private javax.swing.JButton jBotonBorrar;
+    private javax.swing.JButton jBotonBuscar;
+    private javax.swing.JButton jBotonGuardar;
+    private javax.swing.JRadioButton jBotonInscriptas;
+    private javax.swing.JButton jBotonLimpiar;
+    private javax.swing.JRadioButton jBotonNoInscriptas;
+    private javax.swing.JComboBox<Alumno> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
