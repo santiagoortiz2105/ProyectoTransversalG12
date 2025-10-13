@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/Lulim.LOURDES/Documents/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Modelo/Alumno.java</file>
             <file>file:/C:/Users/Lulim.LOURDES/Documents/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Modelo/Materia.java</file>
             <file>file:/C:/Users/Lulim.LOURDES/Documents/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Modelo/Inscripcion.java</file>
@@ -14,6 +15,11 @@
             <file>file:/C:/Users/Lulim.LOURDES/Documents/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMenuPrincipal.java</file>
             <file>file:/C:/Users/Lulim.LOURDES/Documents/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMateria.java</file>
             <file>file:/C:/Users/Lulim.LOURDES/Documents/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmAlumno.java</file>
+=======
+            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMenuPrincipal.java</file>
+            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmMateria.java</file>
+            <file>file:/C:/Users/thefl/OneDrive/Documentos/GitHub/ProyectoTransversalG12/GP12_Universidad/src/Vista/frmAlumno.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
