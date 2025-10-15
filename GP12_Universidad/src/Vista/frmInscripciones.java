@@ -42,6 +42,8 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -92,6 +94,7 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("LISTADO DE MATERIAS ");
 
+        buttonGroup1.add(jBotonInscriptas);
         jBotonInscriptas.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jBotonInscriptas.setForeground(new java.awt.Color(0, 0, 0));
         jBotonInscriptas.setText("Inscriptas");
@@ -101,6 +104,7 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jBotonNoInscriptas);
         jBotonNoInscriptas.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jBotonNoInscriptas.setForeground(new java.awt.Color(0, 0, 0));
         jBotonNoInscriptas.setText("No inscriptas");
@@ -249,7 +253,7 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
     if (alumno != null) {
         List<Materia> materias = inscripcionData.obtenerMateriasInscriptas(alumno.getIdAlumno());
         for (Materia m : materias) {
-            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre()});
         }
     }
     }//GEN-LAST:event_jBotonInscriptasActionPerformed
@@ -260,7 +264,7 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
         if (alumno != null) {
         List<Materia> materias = inscripcionData.obtenerMateriasNoInscriptas(alumno.getIdAlumno());
         for (Materia m : materias) {
-            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre(), m.getAnio()});
+            modelo.addRow(new Object[]{m.getIdMateria(), m.getNombre()});
         }
     }
     }//GEN-LAST:event_jBotonNoInscriptasActionPerformed
@@ -316,7 +320,6 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
     private void armarCabeceraTabla() {
       modelo.addColumn("ID");
       modelo.addColumn("Nombre");
-      modelo.addColumn("Año");
       jTable2.setModel(modelo);
 }
     private void limpiarTabla() {
@@ -324,6 +327,8 @@ public class frmInscripciones extends javax.swing.JInternalFrame {
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jBotonActualizar;
     private javax.swing.JButton jBotonBorrar;
     private javax.swing.JButton jBotonBuscar;
