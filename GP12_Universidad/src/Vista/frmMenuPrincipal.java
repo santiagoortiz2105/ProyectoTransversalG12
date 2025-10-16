@@ -40,6 +40,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jFormularioMaterias = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jFormularioInscripcion = new javax.swing.JMenuItem();
+        jMenuConsulta = new javax.swing.JMenu();
+        jNotasEditar = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenu();
         jSalir = new javax.swing.JMenuItem();
 
@@ -103,6 +105,18 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenuConsulta.setText("Carga de Notas");
+
+        jNotasEditar.setText("Manejo de Notas");
+        jNotasEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNotasEditarActionPerformed(evt);
+            }
+        });
+        jMenuConsulta.add(jNotasEditar);
+
+        jMenuBar1.add(jMenuConsulta);
+
         jMenuSalir.setText("Salir");
 
         jSalir.setText("Salir");
@@ -162,6 +176,15 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jEscritorio.moveToFront(inscripciones);
     }//GEN-LAST:event_jFormularioInscripcionActionPerformed
 
+    private void jNotasEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNotasEditarActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        frmCargaNotas vn = new frmCargaNotas();
+        vn.setVisible(true);
+        jEscritorio.add(vn);
+        jEscritorio.moveToFront(vn);
+    }//GEN-LAST:event_jNotasEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -196,8 +219,10 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuAlumno;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuConsulta;
     private javax.swing.JMenu jMenuMateria;
     private javax.swing.JMenu jMenuSalir;
+    private javax.swing.JMenuItem jNotasEditar;
     private javax.swing.JMenuItem jSalir;
     // End of variables declaration//GEN-END:variables
 }

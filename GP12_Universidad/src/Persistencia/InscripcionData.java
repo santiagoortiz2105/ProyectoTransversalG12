@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -253,6 +254,36 @@ public class InscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
         }
+    }
+    
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
+        List<Inscripcion> inscripciones = new ArrayList<>();
+        LocalDate fechaAux = LocalDate.of(2000, 10, 1);
+        Alumno alumAux;
+        Materia matAux;
+        Inscripcion ins;
+        try {
+            String sql = "SELECT * FROM inscripcion "
+                    + "WHERE idAlumno=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                alumAux = new Alumno();
+                matAux = new Materia();
+                ins = new Inscripcion(alumAux,matAux,0);
+                //hay que setearle un alumno con la idAlumno que trae, y materia igual
+                ins.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                ins.setIdInscripcion(rs.getInt("idInscripcion"));
+                ins.getMateria().setIdMateria(rs.getInt("idMateria"));
+                ins.setNota(rs.getInt("nota"));
+                inscripciones.add(ins);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
+        }
+        return inscripciones;
     }
 
 }

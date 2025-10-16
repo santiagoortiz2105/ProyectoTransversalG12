@@ -141,14 +141,18 @@ public class frmCargaNotas extends javax.swing.JFrame {
         String[] parts = selectedItem.split(" ");
         int id = Integer.parseInt(parts[0]);
         List<Inscripcion> lisa = new ArrayList<>();
+        System.out.println("LISTA!!!!!!!!!!: "+ lisa);
         Materia mat;
         String fila[] = new String[3];
         lisa = inscripData.obtenerInscripcionesPorAlumno(id);
+        System.out.println("ID: "+id);
+        System.out.println("LISTA NUEVA!!!!!!!!!!: "+ lisa);
         for (int i = 0; i < lisa.size(); i++) {
             fila[0] = lisa.get(i).getMateria().getIdMateria() + "";
             mat = materiaData.buscarMateria(lisa.get(i).getMateria().getIdMateria());
             fila[1] = mat.getNombre();
             fila[2] = lisa.get(i).getNota() + "";
+            System.out.println("Filas!!! "+ fila);
             tabla.addRow(fila);
         }
         jLista.setModel(tabla);
