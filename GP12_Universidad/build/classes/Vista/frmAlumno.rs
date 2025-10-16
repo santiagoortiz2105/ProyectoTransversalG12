@@ -4,3 +4,6 @@ vista.frmAlumno$2
 vista.frmAlumno$3
 vista.frmAlumno$4
 vista.frmAlumno$5
+vista.frmAlumno$6
+vista.frmAlumno$7
+vista.frmAlumno$8

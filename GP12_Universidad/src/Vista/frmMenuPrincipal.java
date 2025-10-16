@@ -155,6 +155,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         frmMateria materia = new frmMateria();
         materia.setVisible(true);
         jEscritorio.add(materia);
+        int x = (jEscritorio.getWidth() - materia.getWidth()) / 2;
+        int y = (jEscritorio.getHeight() - materia.getHeight()) / 2;
+        materia.setLocation(x, y);
         jEscritorio.moveToFront(materia);
     }//GEN-LAST:event_jFormularioMateriasActionPerformed
 
@@ -164,6 +167,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         frmAlumno alumno = new frmAlumno();
         alumno.setVisible(true);
         jEscritorio.add(alumno);
+        int x = (jEscritorio.getWidth() - alumno.getWidth()) / 2;
+        int y = (jEscritorio.getHeight() - alumno.getHeight()) / 2;
+        alumno.setLocation(x, y);
         jEscritorio.moveToFront(alumno);
     }//GEN-LAST:event_jFormularioAlumnosActionPerformed
 
@@ -173,6 +179,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         frmInscripciones inscripciones = new frmInscripciones();
         inscripciones.setVisible(true);
         jEscritorio.add(inscripciones);
+        int x = (jEscritorio.getWidth() - inscripciones.getWidth()) / 2;
+        int y = (jEscritorio.getHeight() - inscripciones.getHeight()) / 2;
+        inscripciones.setLocation(x, y);
         jEscritorio.moveToFront(inscripciones);
     }//GEN-LAST:event_jFormularioInscripcionActionPerformed
 
@@ -182,6 +191,9 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         frmCargaNotas vn = new frmCargaNotas();
         vn.setVisible(true);
         jEscritorio.add(vn);
+        int x = (jEscritorio.getWidth() - vn.getWidth()) / 2;
+        int y = (jEscritorio.getHeight() - vn.getHeight()) / 2;
+        vn.setLocation(x, y);
         jEscritorio.moveToFront(vn);
     }//GEN-LAST:event_jNotasEditarActionPerformed
 
