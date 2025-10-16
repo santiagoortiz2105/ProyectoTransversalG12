@@ -44,7 +44,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFielddni = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -125,7 +125,12 @@ public class frmAlumno extends javax.swing.JInternalFrame {
 
         jLabel7.setText("DNI: ");
 
-        jTextField5.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFielddni.setForeground(new java.awt.Color(0, 0, 0));
+        jTextFielddni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFielddniActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +159,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(Buscar))
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextFielddni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -197,7 +202,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFielddni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -254,18 +259,20 @@ public class frmAlumno extends javax.swing.JInternalFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         // Boton Guardar
     try {
+        String dniTxt = jTextFielddni.getText().trim();
         String nombre = jTextField2.getText().trim();
         String apellido = jTextField3.getText().trim();
         String fechaTxt = jTextField4.getText().trim();
         boolean estado = jCheckBox1.isSelected();
-        if (nombre.isEmpty()|| apellido.isEmpty() || fechaTxt.isEmpty()) {
+        if (dniTxt.isEmpty() ||nombre.isEmpty()|| apellido.isEmpty() || fechaTxt.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Complete todos los campos");
             return;
         }
-        
+        int dni = Integer.parseInt(dniTxt);
         LocalDate fechaNac = LocalDate.parse(fechaTxt, formato);
 
         Alumno alumno = new Alumno();
+        alumno.setDni(dni);
         alumno.setNombre(nombre);
         alumno.setApellido(apellido);
         alumno.setEstado(estado);                       
@@ -372,6 +379,10 @@ private void limpiarCampos() {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jTextFielddniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFielddniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFielddniActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
@@ -391,6 +402,6 @@ private void limpiarCampos() {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextFielddni;
     // End of variables declaration//GEN-END:variables
 }
