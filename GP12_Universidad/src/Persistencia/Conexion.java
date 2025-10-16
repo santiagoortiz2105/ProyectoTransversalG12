@@ -28,6 +28,7 @@ public class Conexion {
             try {
                 Class.forName("org.mariadb.jdbc.Driver");
                 connection = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+                connection.setAutoCommit(true);
                 // Opcional: mensaje solo para pruebas
                 JOptionPane.showMessageDialog(null, "Conexión exitosa");
             } catch (ClassNotFoundException ex) {
