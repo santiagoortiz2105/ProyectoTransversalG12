@@ -86,8 +86,11 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuListado">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem1"/>
+                <Property name="text" type="java.lang.String" value="Listado"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuListadoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

@@ -121,7 +121,12 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuListar.setText("Listar Inscripciones");
 
-        jMenuListado.setText("jMenuItem1");
+        jMenuListado.setText("Listado");
+        jMenuListado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuListadoActionPerformed(evt);
+            }
+        });
         jMenuListar.add(jMenuListado);
 
         jMenuBar1.add(jMenuListar);
@@ -206,6 +211,18 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jEscritorio.moveToFront(vn);
     }//GEN-LAST:event_jNotasEditarActionPerformed
 
+    private void jMenuListadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListadoActionPerformed
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        frmListadodeAlumnosporMateria vn = new frmListadodeAlumnosporMateria();
+        vn.setVisible(true);
+        jEscritorio.add(vn);
+        int x = (jEscritorio.getWidth() - vn.getWidth()) / 2;
+        int y = (jEscritorio.getHeight() - vn.getHeight()) / 2;
+        vn.setLocation(x, y);
+        jEscritorio.moveToFront(vn);
+    }//GEN-LAST:event_jMenuListadoActionPerformed
+  
     /**
      * @param args the command line arguments
      */
