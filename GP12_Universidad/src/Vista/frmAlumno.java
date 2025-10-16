@@ -359,6 +359,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
 
 private void limpiarCampos() {
     jTextField1.setText("");
+    jTextFielddni.setText("");
     jTextField2.setText("");
     jTextField3.setText("");
     jTextField4.setText("");
