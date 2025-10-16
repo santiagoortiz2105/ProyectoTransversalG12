@@ -45,7 +45,11 @@ public class frmCargaNotas extends javax.swing.JInternalFrame {
         bGuardar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         lbNotas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lbNotas.setText("Carga de Notas");
