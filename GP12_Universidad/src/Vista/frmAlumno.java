@@ -242,6 +242,7 @@ public class frmAlumno extends javax.swing.JInternalFrame {
         int id = Integer.parseInt(txtId);
         Alumno alumno = alumnoData.buscarAlumno(id);
         if (alumno != null) {
+            jTextFielddni.setText(String.valueOf(alumno.getDni())); 
             jTextField2.setText(alumno.getNombre());
             jTextField3.setText(alumno.getApellido());
             jTextField4.setText(alumno.getFechaNacimiento().format(formato));
