@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Persistencia;
+
 import Modelo.Alumno;
 import Modelo.Materia;
 import Modelo.Inscripcion;
@@ -14,21 +11,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Lulim
- */
+
 public class InscripcionData {
-       private Connection con = null;
-       private AlumnoData alumnoData = new AlumnoData();
-       private MateriaData materiaData = new MateriaData();
-       
-       public InscripcionData() {
+
+    private Connection con = null;
+    private AlumnoData alumnoData = new AlumnoData();
+    private MateriaData materiaData = new MateriaData();
+
+    public InscripcionData() {
         con = Conexion.getConexion();
     }
-       
-       //Guardar Inscripcion 
-       public void guardarInscripcion(Inscripcion insc) {
+
+    //Guardar Inscripcion 
+    public void guardarInscripcion(Inscripcion insc) {
         String sql = "INSERT INTO inscripcion(idAlumno, idMateria, nota) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -47,9 +42,9 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al guardar inscripción: " + ex.getMessage());
         }
     }
-       
-       //Buscar Inscripcion
-          public Inscripcion buscarInscripcion(int id) {
+
+    //Buscar Inscripcion
+    public Inscripcion buscarInscripcion(int id) {
         Inscripcion inscripcion = null;
         String sql = "SELECT * FROM inscripcion WHERE idInscripcion = ?";
         try {
@@ -77,7 +72,7 @@ public class InscripcionData {
         return inscripcion;
     }
 
-          //Modificar Inscripcion
+    //Modificar Inscripcion
     public void modificarInscripcion(Inscripcion inscripcion) {
         String sql = "UPDATE inscripcion SET nota = ?, idAlumno = ?, idMateria = ? WHERE idInscripcion = ?";
         try {
@@ -98,7 +93,8 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al modificar inscripción: " + e.getMessage());
         }
     }
-         //Eliminar Inscripcion
+    
+    //Eliminar Inscripcion
     public void eliminarInscripcion(int id) {
         String sql = "DELETE FROM inscripcion WHERE idInscripcion = ?";
         try {
@@ -115,8 +111,8 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al eliminar inscripción: " + e.getMessage());
         }
     }
-        
-         //Listar la Inscripcion
+
+    //Listar la Inscripcion
     public List<Inscripcion> listarInscripciones() {
         List<Inscripcion> lista = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion";
@@ -140,19 +136,20 @@ public class InscripcionData {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al listar inscripciones: " + e.getMessage());
         }
-        return lista;   
+        return lista;
     }
-        //Materias Inscriptas de un alumno 
+    
+    //Materias Inscriptas de un alumno 
     public List<Materia> obtenerMateriasInscriptas(int idAlumno) {
         List<Materia> materias = new ArrayList<>();
         String sql = "SELECT m.idMateria, m.nombre, m.estado FROM materia m "
-                   + "JOIN inscripcion i ON m.idMateria = i.idMateria "
-                   + "WHERE i.idAlumno = ?";
+                + "JOIN inscripcion i ON m.idMateria = i.idMateria "
+                + "WHERE i.idAlumno = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
@@ -165,17 +162,18 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al obtener materias inscriptas: " + e.getMessage());
         }
         return materias;
-    }    
-        //Materias No inscriptas de un alumno 
+    }
+    
+    //Materias No inscriptas de un alumno 
     public List<Materia> obtenerMateriasNoInscriptas(int idAlumno) {
         List<Materia> materias = new ArrayList<>();
         String sql = "SELECT * FROM materia WHERE estado = 1 AND idMateria NOT IN "
-                   + "(SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+                + "(SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
@@ -189,18 +187,18 @@ public class InscripcionData {
         }
         return materias;
     }
-    
+
     //Alumnos inscriptos en una materia 
-     public List<Alumno> obtenerAlumnosPorMateria(int idMateria) {
+    public List<Alumno> obtenerAlumnosPorMateria(int idMateria) {
         List<Alumno> alumnos = new ArrayList<>();
         String sql = "SELECT a.idAlumno, a.dni, a.apellido, a.nombre, a.fechaNacimiento, a.estado "
-                   + "FROM alumno a JOIN inscripcion i ON a.idAlumno = i.idAlumno "
-                   + "WHERE i.idMateria = ?";
+                + "FROM alumno a JOIN inscripcion i ON a.idAlumno = i.idAlumno "
+                + "WHERE i.idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Alumno alumno = new Alumno();
                 alumno.setIdAlumno(rs.getInt("idAlumno"));
@@ -217,25 +215,44 @@ public class InscripcionData {
         }
         return alumnos;
     }
-     
-     //Eliminar inscripcion segun alumno y materia 
-     public void eliminarInscripcionPorAlumnoYMateria(int idAlumno, int idMateria) {
-    String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, idAlumno);
-        ps.setInt(2, idMateria);
-        int exito = ps.executeUpdate();
 
-        if (exito == 1) {
-            JOptionPane.showMessageDialog(null, "Inscripción eliminada correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró la inscripción a eliminar.");
+    //Eliminar inscripcion segun alumno y materia 
+    public void eliminarInscripcionPorAlumnoYMateria(int idAlumno, int idMateria) {
+        String sql = "DELETE FROM inscripcion WHERE idAlumno = ? AND idMateria = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Inscripción eliminada correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró la inscripción a eliminar.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar la inscripción: " + e.getMessage());
         }
-        ps.close();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al eliminar la inscripción: " + e.getMessage());
     }
-}
-     
+    
+    //Actualizar nota
+    public void actualizarNota(int idA, int idM, double not){
+        try {
+            String sql = "UPDATE inscripcion SET nota=? WHERE idAlumno=? && idMateria=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, not);
+            ps.setInt(2, idA);
+            ps.setInt(3, idM);
+            int exito = ps.executeUpdate();
+            if (exito==1) {
+                JOptionPane.showMessageDialog(null, "Nota cambiada.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo cambiar la nota.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
+        }
+    }
+
 }
