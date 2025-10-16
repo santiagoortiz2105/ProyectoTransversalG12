@@ -45,7 +45,7 @@ public class frmListadodeAlumnosporMateria extends javax.swing.JInternalFrame {
          jComboBox1.removeAllItems();
     ArrayList<Materia> materias = (ArrayList<Materia>) materiaData.listarMaterias();
     for (Materia m : materias) {
-        jComboBox1.addItem(m.getNombre()); // Solo el nombre
+        jComboBox1.addItem(m.getNombre()); 
     }
     }
     
