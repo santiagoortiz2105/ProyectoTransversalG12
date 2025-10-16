@@ -260,7 +260,9 @@ public class InscripcionData {
         List<Inscripcion> inscripciones = new ArrayList<>();
         LocalDate fechaAux = LocalDate.of(2000, 10, 1);
         Alumno alumAux;
+        AlumnoData alumData = new AlumnoData();
         Materia matAux;
+        MateriaData matData = new MateriaData();
         Inscripcion ins;
         try {
             String sql = "SELECT * FROM inscripcion "
@@ -273,11 +275,12 @@ public class InscripcionData {
                 matAux = new Materia();
                 ins = new Inscripcion(alumAux,matAux,0);
                 //hay que setearle un alumno con la idAlumno que trae, y materia igual
-                ins.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                ins.setAlumno(alumData.buscarAlumno(rs.getInt("idAlumno")));
                 ins.setIdInscripcion(rs.getInt("idInscripcion"));
-                ins.getMateria().setIdMateria(rs.getInt("idMateria"));
+                ins.setMateria(matData.buscarMateria(rs.getInt("idMateria")));
                 ins.setNota(rs.getInt("nota"));
                 inscripciones.add(ins);
+                System.out.println("INSCRIPCION!!"+ins);
             }
             ps.close();
         } catch (SQLException ex) {

@@ -12,7 +12,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class frmCargaNotas extends javax.swing.JFrame {
+public class frmCargaNotas extends javax.swing.JInternalFrame {
+
     private List<Alumno> listaA;
     private DefaultTableModel tabla;
     private static AlumnoData alumnoData;
@@ -134,46 +135,65 @@ public class frmCargaNotas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void jComboAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboAlumnoActionPerformed
         borrarTabla();
+
+        // 🔹 Crear el modelo bloqueando columnas 0 y 1
+        DefaultTableModel tabla = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Solo se puede editar la columna de nota (la 2)
+                return column == 2;
+            }
+        };
+
+        // 🔹 Agregás las columnas
+        tabla.addColumn("Cod. Interno Materia");
+        tabla.addColumn("Nombre Materia");
+        tabla.addColumn("Nota");
+
         String selectedItem = jComboAlumno.getSelectedItem().toString();
         String[] parts = selectedItem.split(" ");
         int id = Integer.parseInt(parts[0]);
-        List<Inscripcion> lisa = new ArrayList<>();
-        System.out.println("LISTA!!!!!!!!!!: "+ lisa);
+
+        List<Inscripcion> lisa = inscripData.obtenerInscripcionesPorAlumno(id);
         Materia mat;
         String fila[] = new String[3];
-        lisa = inscripData.obtenerInscripcionesPorAlumno(id);
-        System.out.println("ID: "+id);
-        System.out.println("LISTA NUEVA!!!!!!!!!!: "+ lisa);
+
         for (int i = 0; i < lisa.size(); i++) {
-            fila[0] = lisa.get(i).getMateria().getIdMateria() + "";
             mat = materiaData.buscarMateria(lisa.get(i).getMateria().getIdMateria());
+            fila[0] = String.valueOf(mat.getIdMateria());
             fila[1] = mat.getNombre();
-            fila[2] = lisa.get(i).getNota() + "";
-            System.out.println("Filas!!! "+ fila);
+            fila[2] = String.valueOf(lisa.get(i).getNota());
             tabla.addRow(fila);
         }
+
+        // 🔹 Seteás el modelo a la tabla
         jLista.setModel(tabla);
     }//GEN-LAST:event_jComboAlumnoActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        try{
-            String selectedItem = jComboAlumno.getSelectedItem().toString();
-            String[] parts = selectedItem.split(" ");
-            int idA = Integer.parseInt(parts[0]);
-            int filaSelec = jLista.getSelectedRow();
-            String idMatString = (String) tabla.getValueAt(filaSelec, 0);
-            int idMat = Integer.parseInt(idMatString);
-            int filaSelec2 = jLista.getSelectedRow();
-            String idMatString2 = (String) tabla.getValueAt(filaSelec2, 2);
-            double nota = Double.parseDouble(idMatString2);
-            inscripData.actualizarNota(idA, idMat, nota);
-            borrarTabla();
-        } catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "ERROR: Falto dar ENTER "+ex.getMessage());
+        if (jLista.isEditing()) {
+            jLista.getCellEditor().stopCellEditing();
         }
+
+        int filaSelec = jLista.getSelectedRow();
+        if (filaSelec == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccioná una fila antes de guardar.");
+            return;
+        }
+
+        DefaultTableModel modelo = (DefaultTableModel) jLista.getModel();
+
+        String selectedItem = jComboAlumno.getSelectedItem().toString();
+        int idA = Integer.parseInt(selectedItem.split(" ", 2)[0]);
+
+        int idMat = Integer.parseInt(modelo.getValueAt(filaSelec, 0).toString());
+        double nota = Double.parseDouble(modelo.getValueAt(filaSelec, 2).toString());
+
+        inscripData.actualizarNota(idA, idMat, nota);
+        JOptionPane.showMessageDialog(this, "Nota actualizada correctamente.");
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
@@ -183,7 +203,7 @@ public class frmCargaNotas extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new frmCargaNotas().setVisible(true));
     }
-    
+
     public void crearTabla() {
         ArrayList<Object> columnas = new ArrayList<Object>();
         columnas.add("ID");
