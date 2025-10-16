@@ -42,6 +42,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jFormularioInscripcion = new javax.swing.JMenuItem();
         jMenuConsulta = new javax.swing.JMenu();
         jNotasEditar = new javax.swing.JMenuItem();
+        jMenuListar = new javax.swing.JMenu();
+        jMenuListado = new javax.swing.JMenuItem();
         jMenuSalir = new javax.swing.JMenu();
         jSalir = new javax.swing.JMenuItem();
 
@@ -116,6 +118,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         jMenuConsulta.add(jNotasEditar);
 
         jMenuBar1.add(jMenuConsulta);
+
+        jMenuListar.setText("Listar Inscripciones");
+
+        jMenuListado.setText("jMenuItem1");
+        jMenuListar.add(jMenuListado);
+
+        jMenuBar1.add(jMenuListar);
 
         jMenuSalir.setText("Salir");
 
@@ -232,6 +241,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAlumno;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuConsulta;
+    private javax.swing.JMenuItem jMenuListado;
+    private javax.swing.JMenu jMenuListar;
     private javax.swing.JMenu jMenuMateria;
     private javax.swing.JMenu jMenuSalir;
     private javax.swing.JMenuItem jNotasEditar;
